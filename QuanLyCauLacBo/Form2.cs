@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic.Logging;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -177,12 +178,33 @@ namespace QuanLyCauLacBo
             sda2.Fill(dttb2);
             txtTongchi.Text = Convert.ToString(dttb2.Rows[0]["tongChi"].ToString());
         }
+        public void showDanhSachDongGop()
+        {
+            DataTable dttb = new DataTable();
+            clsDatabase.OpenConnection();
+            string query = "select thanhVien.cccd, hoTen, email, soDienThoai, diaChi, soTien, ngayDong, tongTien, ngayThamGia, tenCV from dongGop join thanhVien on dongGop.cccd = thanhVien.cccd join chucVu on thanhVien.maCV = chucVu.maCV order by ngayDong DESC;";
+            SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
+            sda.Fill(dttb);
+            dgvDanhSachDongGop.DataSource = dttb;
+            dgvDanhSachDongGop.Columns[0].HeaderText = "Căn cước công dân";
+            dgvDanhSachDongGop.Columns[1].HeaderText = "Họ tên";
+            dgvDanhSachDongGop.Columns[2].HeaderText = "Email";
+            dgvDanhSachDongGop.Columns[3].HeaderText = "Số điện thoại";
+            dgvDanhSachDongGop.Columns[4].HeaderText = "Địa chỉ";
+            dgvDanhSachDongGop.Columns[5].HeaderText = "Đóng góp";
+            dgvDanhSachDongGop.Columns[6].HeaderText = "Ngày đóng";
+            dgvDanhSachDongGop.Columns[7].HeaderText = "Tổng số tiền đã đóng";
+            dgvDanhSachDongGop.Columns[8].HeaderText = "Ngày tham gia";
+            dgvDanhSachDongGop.Columns[9].HeaderText = "Chức vụ";
+            dgvDanhSachDongGop.ReadOnly = true;
+        }
         private void Form2_Load(object sender, EventArgs e)
         {
             showDanhSachThanhVien();
             showDanhSachSuKien();
             reset();
             showTaiChinh();
+            showDanhSachDongGop();
         }
         private void loadGioiTinh()
         {
@@ -228,6 +250,10 @@ namespace QuanLyCauLacBo
             txtPhi.Text = "";
             dtpTgbatdau.Value = DateTime.Now;
             dtpTgketthuc.Value = DateTime.Now;
+
+            txtCCCDtc.Text = "";
+            txtSotien.Text = "";
+            dtpNgayDong.Value = DateTime.Now;
         }
         private static bool IsValid(string email)
         {
@@ -555,6 +581,145 @@ namespace QuanLyCauLacBo
                     showDanhSachThamGia();
                     reset();
                     MessageBox.Show("Đã điểm danh thành viên tham gia sự kiện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
+        private void btnThemTC_Click(object sender, EventArgs e)
+        {
+            if (true)
+            {
+                try
+                {
+                    clsDatabase.OpenConnection();
+                    string query = "INSERT INTO dongGop (soTien, ngayDong, cccd) values( '" + txtSotien.Text + "',CONVERT(datetime, CONVERT(datetime, '" + dtpNgayDong.Text + "', 103), 108),'" + txtCCCDtc.Text + "')";
+                    SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
+                    insertCmd.CommandType = CommandType.Text;
+                    insertCmd.ExecuteNonQuery();
+
+                    string query1 = "update taiChinh set soDu = (soDu + '" + txtSotien.Text + "')";
+                    SqlCommand updateCmd = new SqlCommand(query1, clsDatabase.con);
+                    updateCmd.CommandType = CommandType.Text;
+                    updateCmd.ExecuteNonQuery();
+
+                    string query2 = "update thanhVien set tongTien = (tongTien + '" + txtSotien.Text + "') where cccd = '" + txtCCCDtc.Text + "'";
+                    SqlCommand updateCmd2 = new SqlCommand(query2, clsDatabase.con);
+                    updateCmd2.CommandType = CommandType.Text;
+                    updateCmd2.ExecuteNonQuery();
+
+                    showTaiChinh();
+                    showDanhSachDongGop();
+                    showDanhSachThanhVien();
+                    reset();
+                    MessageBox.Show("Đã thêm thông tin đóng góp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
+        private void btnThoatTC_Click(object sender, EventArgs e)
+        {
+            Form frm = new Form1();
+            frm.Show();
+            this.Close();
+        }
+        static String? Temp;
+        private void dgvDanhSachDongGop_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = new DataGridViewRow();
+            row = dgvDanhSachDongGop.Rows[e.RowIndex];
+            txtCCCDtc.Text = Convert.ToString(row.Cells["cccd"].Value);
+            dtpNgayDong.Text = Convert.ToString(row.Cells["ngayDong"].Value);
+            txtSotien.Text = Convert.ToString(row.Cells["soTien"].Value);
+            Temp = Convert.ToString(row.Cells["soTien"].Value);
+            showDanhSachDongGop();
+        }
+        private void txtCCCDtimkiemTC_TextChanged(object sender, EventArgs e)
+        {
+            string rowFilter = string.Format("{0} like '{1}'", "maSK", "*" + txtCCCDtimkiemTC.Text + "*");
+            (dgvDanhSachDongGop.DataSource as DataTable).DefaultView.RowFilter = rowFilter;
+        }
+
+        private void btnSuaTC_Click(object sender, EventArgs e)
+        {
+            if (true)
+            {
+                try
+                {
+                    clsDatabase.OpenConnection();
+                    string query = "update dongGop set soTien = '" + txtSotien + "' where cccd = '" + txtCCCDtc.Text + "'";
+                    SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
+                    insertCmd.CommandType = CommandType.Text;
+                    insertCmd.ExecuteNonQuery();
+
+                    string query1 = "update taiChinh set soDu = (soDu + '" + txtSotien.Text + "' - '" + Temp + "')";
+                    SqlCommand updateCmd = new SqlCommand(query1, clsDatabase.con);
+                    updateCmd.CommandType = CommandType.Text;
+                    updateCmd.ExecuteNonQuery();
+
+                    string query2 = "update thanhVien set tongTien = (tongTien + '" + txtSotien.Text + "'  - '" + Temp + "' ) where cccd = '" + txtCCCDtc.Text + "'";
+                    SqlCommand updateCmd2 = new SqlCommand(query2, clsDatabase.con);
+                    updateCmd2.CommandType = CommandType.Text;
+                    updateCmd2.ExecuteNonQuery();
+
+                    showTaiChinh();
+                    showDanhSachDongGop();
+                    showDanhSachThanhVien();
+                    reset();
+                    MessageBox.Show("Đã sửa thông tin đóng góp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
+        private void btnLuuTC_Click(object sender, EventArgs e)
+        {
+            showTaiChinh();
+            showDanhSachDongGop();
+            showDanhSachThanhVien();
+            reset();
+        }
+
+        private void btnXoaTC_Click(object sender, EventArgs e)
+        {
+            if (true)
+            {
+                try
+                {
+                    clsDatabase.OpenConnection();
+                    string query = "delete from dongGop where cccd ='" + txtCCCDtc.Text + "'";
+                    SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
+                    insertCmd.CommandType = CommandType.Text;
+                    insertCmd.ExecuteNonQuery();
+
+                    string query1 = "update taiChinh set soDu = (soDu - '" + Temp + "')";
+                    SqlCommand updateCmd = new SqlCommand(query1, clsDatabase.con);
+                    updateCmd.CommandType = CommandType.Text;
+                    updateCmd.ExecuteNonQuery();
+
+                    string query2 = "update thanhVien set tongTien = (tongTien - '" + Temp + "' ) where cccd = '" + txtCCCDtc.Text + "'";
+                    SqlCommand updateCmd2 = new SqlCommand(query2, clsDatabase.con);
+                    updateCmd2.CommandType = CommandType.Text;
+                    updateCmd2.ExecuteNonQuery();
+
+                    showTaiChinh();
+                    showDanhSachDongGop();
+                    showDanhSachThanhVien();
+                    reset();
+                    MessageBox.Show("Đã xóa thông tin đóng góp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SqlException ex)
                 {
