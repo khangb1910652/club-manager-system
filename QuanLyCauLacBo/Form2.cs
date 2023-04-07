@@ -597,7 +597,7 @@ namespace QuanLyCauLacBo
                 try
                 {
                     clsDatabase.OpenConnection();
-                    string query = "INSERT INTO dongGop (soTien, ngayDong, cccd) values( '" + txtSotien.Text + "',CONVERT(datetime, CONVERT(datetime, '" + dtpNgayDong.Text + "', 103), 108),'" + txtCCCDtc.Text + "')";
+                    string query = "INSERT INTO dongGop (soTien, ngayDong, cccd) values( '" + txtSotien.Text + "', CONVERT(datetime, CONVERT(datetime, '" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "', 103), 108), '" + txtCCCDtc.Text + "')";
                     SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
                     insertCmd.CommandType = CommandType.Text;
                     insertCmd.ExecuteNonQuery();
@@ -632,7 +632,7 @@ namespace QuanLyCauLacBo
             frm.Show();
             this.Close();
         }
-        static String? Temp;
+        static string? Temp;
         private void dgvDanhSachDongGop_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = new DataGridViewRow();
@@ -641,11 +641,11 @@ namespace QuanLyCauLacBo
             dtpNgayDong.Text = Convert.ToString(row.Cells["ngayDong"].Value);
             txtSotien.Text = Convert.ToString(row.Cells["soTien"].Value);
             Temp = Convert.ToString(row.Cells["soTien"].Value);
-            showDanhSachDongGop();
+            
         }
         private void txtCCCDtimkiemTC_TextChanged(object sender, EventArgs e)
         {
-            string rowFilter = string.Format("{0} like '{1}'", "maSK", "*" + txtCCCDtimkiemTC.Text + "*");
+            string rowFilter = string.Format("{0} like '{1}'", "cccd", "*" + txtCCCDtimkiemTC.Text + "*");
             (dgvDanhSachDongGop.DataSource as DataTable).DefaultView.RowFilter = rowFilter;
         }
 
@@ -656,7 +656,7 @@ namespace QuanLyCauLacBo
                 try
                 {
                     clsDatabase.OpenConnection();
-                    string query = "update dongGop set soTien = '" + txtSotien + "' where cccd = '" + txtCCCDtc.Text + "'";
+                    string query = "update dongGop set soTien = '" + txtSotien.Text + "' where cccd = '" + txtCCCDtc.Text + "' and ngayDong = CONVERT(datetime, CONVERT(datetime, '" + dtpNgayDong.Text + "', 103), 108)";
                     SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
                     insertCmd.CommandType = CommandType.Text;
                     insertCmd.ExecuteNonQuery();
@@ -700,7 +700,7 @@ namespace QuanLyCauLacBo
                 try
                 {
                     clsDatabase.OpenConnection();
-                    string query = "delete from dongGop where cccd ='" + txtCCCDtc.Text + "'";
+                    string query = "delete from dongGop where cccd ='" + txtCCCDtc.Text + "' and ngayDong = CONVERT(datetime, CONVERT(datetime, '" + dtpNgayDong.Text + "', 103), 108)";
                     SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
                     insertCmd.CommandType = CommandType.Text;
                     insertCmd.ExecuteNonQuery();
