@@ -14,7 +14,7 @@ namespace QuanLyCauLacBo
         {
             try
             {
-                con = new SqlConnection("Server=KHANGEACE\\SQLEXPRESS; Database=QuanLyCLB; uid=sa; pwd=b1910652");
+                con = new SqlConnection("Data Source=QUOCBAO;Initial Catalog=QuanLyCLB;Integrated Security=True");
                 con.Open();
             }
             catch (Exception)
