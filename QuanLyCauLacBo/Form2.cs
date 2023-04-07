@@ -250,7 +250,8 @@ namespace QuanLyCauLacBo
             txtPhi.Text = "";
             dtpTgbatdau.Value = DateTime.Now;
             dtpTgketthuc.Value = DateTime.Now;
-
+            txtMasukien.Text = "";
+            
             txtCCCDtc.Text = "";
             txtSotien.Text = "";
             dtpNgayDong.Value = DateTime.Now;
@@ -367,7 +368,7 @@ namespace QuanLyCauLacBo
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (checkThongTin())
+            if (checkThongTin() )
             {
                 try
                 {
@@ -490,7 +491,7 @@ namespace QuanLyCauLacBo
             dtpTgbatdau.Text = Convert.ToString(row.Cells["thoiGianBatDau"].Value);
             dtpTgketthuc.Text = Convert.ToString(row.Cells["thoiGianKetThuc"].Value);
             txtPhi.Text = Convert.ToString(row.Cells["phi"].Value);
-        
+
         }
 
         private void btnThemsk_Click(object sender, EventArgs e)
@@ -524,7 +525,7 @@ namespace QuanLyCauLacBo
 
         private void btnSuask_Click(object sender, EventArgs e)
         {
-            if (checkThongTinsk())
+            if (checkThongTinsk() && txtMasukien.Text != "" )
             {
                 try
                 {
@@ -539,7 +540,8 @@ namespace QuanLyCauLacBo
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Vui lòng chọn mã sự kiện từ danh sách sự kiện!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
 
             }
@@ -670,7 +672,7 @@ namespace QuanLyCauLacBo
             dtpNgayDong.Text = Convert.ToString(row.Cells["ngayDong"].Value);
             txtSotien.Text = Convert.ToString(row.Cells["soTien"].Value);
             Temp = Convert.ToString(row.Cells["soTien"].Value);
-            
+
         }
         private void txtCCCDtimkiemTC_TextChanged(object sender, EventArgs e)
         {
