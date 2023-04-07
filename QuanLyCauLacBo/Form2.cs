@@ -438,9 +438,40 @@ namespace QuanLyCauLacBo
             showDanhSachThamGia();
         }
 
+        public bool checkThongTinsk()
+        {
+            if (txtTensukien.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập tên sự kiện!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtTensukien.Focus();
+                return false;
+            }
+            if (txtDiadiem.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập địa điểm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDiadiem.Focus();
+                return false;
+            }
+            if (txtNoidungsk.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập nội dung sự kiện!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNoidungsk.Focus();
+                return false;
+            }
+            if (txtPhi.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập vào phí!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtTrinhdo.Focus();
+                return false;
+            }
+
+            return true;
+
+        }
+
         private void btnThemsk_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (checkThongTinsk())
             {
                 try
                 {
@@ -460,9 +491,10 @@ namespace QuanLyCauLacBo
                     MessageBox.Show("Đã thêm mới sự kiện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
 
             }
         }
@@ -500,10 +532,18 @@ namespace QuanLyCauLacBo
                     string query = "delete from suKien where maSK ='" + txtMasukien.Text + "'";
                     SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
                     insertCmd.CommandType = CommandType.Text;
-                    insertCmd.ExecuteNonQuery();
-                    showDanhSachSuKien();
-                    reset();
-                    MessageBox.Show("Đã xóa sự kiện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    int rowsAffected = insertCmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        showDanhSachSuKien();
+                        reset();
+                        MessageBox.Show("Đã xóa sự kiện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy sự kiện để xoá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
                 }
                 catch (SqlException ex)
                 {
@@ -516,6 +556,7 @@ namespace QuanLyCauLacBo
                 txtMasukien.Focus();
             }
         }
+
 
         private void btnDonSK_Click(object sender, EventArgs e)
         {
@@ -562,6 +603,11 @@ namespace QuanLyCauLacBo
                 }
 
             }
+        }
+
+        private void txtTongtien_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
