@@ -449,7 +449,36 @@ namespace QuanLyCauLacBo
         {
 
         }
+        public bool checkThongTinsk()
+        {
+            if (txtTensukien.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập tên sự kiện!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtTensukien.Focus();
+                return false;
+            }
+            if (txtDiadiem.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập địa điểm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDiadiem.Focus();
+                return false;
+            }
+            if (txtNoidungsk.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập nội dung sự kiện!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNoidungsk.Focus();
+                return false;
+            }
+            if (txtPhi.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập vào phí!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtTrinhdo.Focus();
+                return false;
+            }
 
+            return true;
+
+        }
         private void dgvDanhSachSuKien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = new DataGridViewRow();
@@ -461,12 +490,12 @@ namespace QuanLyCauLacBo
             dtpTgbatdau.Text = Convert.ToString(row.Cells["thoiGianBatDau"].Value);
             dtpTgketthuc.Text = Convert.ToString(row.Cells["thoiGianKetThuc"].Value);
             txtPhi.Text = Convert.ToString(row.Cells["phi"].Value);
-            showDanhSachThamGia();
+        
         }
 
         private void btnThemsk_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (checkThongTinsk())
             {
                 try
                 {
@@ -495,7 +524,7 @@ namespace QuanLyCauLacBo
 
         private void btnSuask_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (checkThongTinsk())
             {
                 try
                 {
