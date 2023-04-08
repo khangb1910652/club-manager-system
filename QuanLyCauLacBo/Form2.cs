@@ -127,7 +127,7 @@ namespace QuanLyCauLacBo
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select maSK, tenSK, noiDungSK, thoiGianBatDau, thoiGianKetThuc, diaDiem, phi from suKien order by thoiGianBatDau DESC;";
+            string query = "select maSK, tenSK, noiDungSK, thoiGianBatDau, thoiGianKetThuc, diaDiem, phi, (select count(*) from danhSachThamGia where danhSachThamGia.maSK = suKien.maSK) as soNguoiThamGia from suKien order by thoiGianBatDau DESC;";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgvDanhSachSuKien.DataSource = dttb;
@@ -140,6 +140,7 @@ namespace QuanLyCauLacBo
             dgvDanhSachSuKien.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
             dgvDanhSachSuKien.Columns[5].HeaderText = "Địa điểm";
             dgvDanhSachSuKien.Columns[6].HeaderText = "Phí";
+            dgvDanhSachSuKien.Columns[7].HeaderText = "Số người tham gia";
             dgvDanhSachSuKien.ReadOnly = true;
         }
 
@@ -262,7 +263,7 @@ namespace QuanLyCauLacBo
             dtpTgbatdau.Value = DateTime.Now;
             dtpTgketthuc.Value = DateTime.Now;
             txtMasukien.Text = "";
-            
+
             txtCCCDtc.Text = "";
             txtSotien.Text = "";
             dtpNgayDong.Value = DateTime.Now;
@@ -383,7 +384,7 @@ namespace QuanLyCauLacBo
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (checkThongTin() )
+            if (checkThongTin())
             {
                 try
                 {
@@ -508,8 +509,9 @@ namespace QuanLyCauLacBo
                 dtpTgbatdau.Text = Convert.ToString(row.Cells["thoiGianBatDau"].Value);
                 dtpTgketthuc.Text = Convert.ToString(row.Cells["thoiGianKetThuc"].Value);
                 txtPhi.Text = Convert.ToString(row.Cells["phi"].Value);
+                showDanhSachThamGia();
             }
-            
+
         }
 
         private void btnThemsk_Click(object sender, EventArgs e)
@@ -543,7 +545,7 @@ namespace QuanLyCauLacBo
 
         private void btnSuask_Click(object sender, EventArgs e)
         {
-            if (checkThongTinsk() && txtMasukien.Text != "" )
+            if (checkThongTinsk() && txtMasukien.Text != "")
             {
                 try
                 {
@@ -692,7 +694,7 @@ namespace QuanLyCauLacBo
                 dtpNgayDong.Text = Convert.ToString(row.Cells["ngayDong"].Value);
                 txtSotien.Text = Convert.ToString(row.Cells["soTien"].Value);
                 Temp = Convert.ToString(row.Cells["soTien"].Value);
-            }     
+            }
         }
         private void txtCCCDtimkiemTC_TextChanged(object sender, EventArgs e)
         {
