@@ -60,6 +60,7 @@ namespace QuanLyCauLacBo
 
         private void txtTendangnhap_TextChanged(object sender, EventArgs e)
         {
+            txtTendangnhap.ForeColor = Color.LightGray;
 
         }
     }
