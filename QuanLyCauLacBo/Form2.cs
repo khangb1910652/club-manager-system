@@ -61,9 +61,9 @@ namespace QuanLyCauLacBo
         {
 
             DataGridViewRow row = new DataGridViewRow();
-            row = dgwDanhSachSinhVien.Rows[e.RowIndex];
-            if(row.Index >= 0)
+            if (e.RowIndex >= 0)
             {
+                row = dgwDanhSachSinhVien.Rows[e.RowIndex];
                 txtCCCD.Text = Convert.ToString(row.Cells["cccd"].Value);
                 txtHoten.Text = Convert.ToString(row.Cells["hoTen"].Value);
                 String? gioiTinh = Convert.ToString(row.Cells["gioiTinh"].Value);
@@ -98,13 +98,13 @@ namespace QuanLyCauLacBo
                         break;
                 }
                 txtTongtien.Text = Convert.ToString(row.Cells["tongTien"].Value);
-            }    
+            }
         }
         public void showDanhSachThanhVien()
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from thanhVien join chucVu on thanhVien.maCV = chucVu.maCV;";
+            string query = "select cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from thanhVien join chucVu on thanhVien.maCV = chucVu.maCV order by ngayThamGia DESC;";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgwDanhSachSinhVien.DataSource = dttb;
@@ -127,7 +127,7 @@ namespace QuanLyCauLacBo
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select maSK, tenSK, noiDungSK, thoiGianBatDau, thoiGianKetThuc, diaDiem, phi from suKien;";
+            string query = "select maSK, tenSK, noiDungSK, thoiGianBatDau, thoiGianKetThuc, diaDiem, phi from suKien order by thoiGianBatDau DESC;";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgvDanhSachSuKien.DataSource = dttb;
@@ -498,15 +498,18 @@ namespace QuanLyCauLacBo
         private void dgvDanhSachSuKien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = new DataGridViewRow();
-            row = dgvDanhSachSuKien.Rows[e.RowIndex];
-            txtMasukien.Text = Convert.ToString(row.Cells["maSK"].Value);
-            txtTensukien.Text = Convert.ToString(row.Cells["tenSK"].Value);
-            txtDiadiem.Text = Convert.ToString(row.Cells["diaDiem"].Value);
-            txtNoidungsk.Text = Convert.ToString(row.Cells["noiDungSK"].Value);
-            dtpTgbatdau.Text = Convert.ToString(row.Cells["thoiGianBatDau"].Value);
-            dtpTgketthuc.Text = Convert.ToString(row.Cells["thoiGianKetThuc"].Value);
-            txtPhi.Text = Convert.ToString(row.Cells["phi"].Value);
-
+            if (e.RowIndex >= 0)
+            {
+                row = dgvDanhSachSuKien.Rows[e.RowIndex];
+                txtMasukien.Text = Convert.ToString(row.Cells["maSK"].Value);
+                txtTensukien.Text = Convert.ToString(row.Cells["tenSK"].Value);
+                txtDiadiem.Text = Convert.ToString(row.Cells["diaDiem"].Value);
+                txtNoidungsk.Text = Convert.ToString(row.Cells["noiDungSK"].Value);
+                dtpTgbatdau.Text = Convert.ToString(row.Cells["thoiGianBatDau"].Value);
+                dtpTgketthuc.Text = Convert.ToString(row.Cells["thoiGianKetThuc"].Value);
+                txtPhi.Text = Convert.ToString(row.Cells["phi"].Value);
+            }
+            
         }
 
         private void btnThemsk_Click(object sender, EventArgs e)
@@ -682,12 +685,14 @@ namespace QuanLyCauLacBo
         private void dgvDanhSachDongGop_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = new DataGridViewRow();
-            row = dgvDanhSachDongGop.Rows[e.RowIndex];
-            txtCCCDtc.Text = Convert.ToString(row.Cells["cccd"].Value);
-            dtpNgayDong.Text = Convert.ToString(row.Cells["ngayDong"].Value);
-            txtSotien.Text = Convert.ToString(row.Cells["soTien"].Value);
-            Temp = Convert.ToString(row.Cells["soTien"].Value);
-
+            if (e.RowIndex >= 0)
+            {
+                row = dgvDanhSachDongGop.Rows[e.RowIndex];
+                txtCCCDtc.Text = Convert.ToString(row.Cells["cccd"].Value);
+                dtpNgayDong.Text = Convert.ToString(row.Cells["ngayDong"].Value);
+                txtSotien.Text = Convert.ToString(row.Cells["soTien"].Value);
+                Temp = Convert.ToString(row.Cells["soTien"].Value);
+            }     
         }
         private void txtCCCDtimkiemTC_TextChanged(object sender, EventArgs e)
         {
