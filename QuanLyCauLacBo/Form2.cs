@@ -61,47 +61,50 @@ namespace QuanLyCauLacBo
         {
 
             DataGridViewRow row = new DataGridViewRow();
-            row = dgwDanhSachSinhVien.Rows[e.RowIndex];
-            txtCCCD.Text = Convert.ToString(row.Cells["cccd"].Value);
-            txtHoten.Text = Convert.ToString(row.Cells["hoTen"].Value);
-            String? gioiTinh = Convert.ToString(row.Cells["gioiTinh"].Value);
-            if (gioiTinh == "Nam")
+            if (e.RowIndex >= 0)
             {
-                cbxGioitinh.SelectedIndex = 0;
+                row = dgwDanhSachSinhVien.Rows[e.RowIndex];
+                txtCCCD.Text = Convert.ToString(row.Cells["cccd"].Value);
+                txtHoten.Text = Convert.ToString(row.Cells["hoTen"].Value);
+                String? gioiTinh = Convert.ToString(row.Cells["gioiTinh"].Value);
+                if (gioiTinh == "Nam")
+                {
+                    cbxGioitinh.SelectedIndex = 0;
+                }
+                else
+                {
+                    cbxGioitinh.SelectedIndex = 1;
+                }
+                dtpNgaysinh.Text = Convert.ToString(row.Cells["ngaySinh"].Value);
+                txtTrinhdo.Text = Convert.ToString(row.Cells["trinhDo"].Value);
+                txtDiachi.Text = Convert.ToString(row.Cells["diaChi"].Value);
+                txtSodienthoai.Text = Convert.ToString(row.Cells["soDienThoai"].Value);
+                txtEmail.Text = Convert.ToString(row.Cells["email"].Value);
+                dtpNgaythamgia.Text = Convert.ToString(row.Cells["ngayThamGia"].Value);
+                String? chucVu = Convert.ToString(row.Cells["tenCV"].Value);
+                switch (chucVu)
+                {
+                    case "Thành viên":
+                        cbxChucvu.SelectedIndex = 0;
+                        break;
+                    case "Trưởng câu lạc bộ":
+                        cbxChucvu.SelectedIndex = 1;
+                        break;
+                    case "Phó câu lạc bộ":
+                        cbxChucvu.SelectedIndex = 2;
+                        break;
+                    case "Huấn luyện viên câu lạc bộ":
+                        cbxChucvu.SelectedIndex = 3;
+                        break;
+                }
+                txtTongtien.Text = Convert.ToString(row.Cells["tongTien"].Value);
             }
-            else
-            {
-                cbxGioitinh.SelectedIndex = 1;
-            }
-            dtpNgaysinh.Text = Convert.ToString(row.Cells["ngaySinh"].Value);
-            txtTrinhdo.Text = Convert.ToString(row.Cells["trinhDo"].Value);
-            txtDiachi.Text = Convert.ToString(row.Cells["diaChi"].Value);
-            txtSodienthoai.Text = Convert.ToString(row.Cells["soDienThoai"].Value);
-            txtEmail.Text = Convert.ToString(row.Cells["email"].Value);
-            dtpNgaythamgia.Text = Convert.ToString(row.Cells["ngayThamGia"].Value);
-            String? chucVu = Convert.ToString(row.Cells["tenCV"].Value);
-            switch (chucVu)
-            {
-                case "Thành viên":
-                    cbxChucvu.SelectedIndex = 0;
-                    break;
-                case "Trưởng câu lạc bộ":
-                    cbxChucvu.SelectedIndex = 1;
-                    break;
-                case "Phó câu lạc bộ":
-                    cbxChucvu.SelectedIndex = 2;
-                    break;
-                case "Huấn luyện viên câu lạc bộ":
-                    cbxChucvu.SelectedIndex = 3;
-                    break;
-            }
-            txtTongtien.Text = Convert.ToString(row.Cells["tongTien"].Value);
         }
         public void showDanhSachThanhVien()
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, CONVERT(date, ngaySinh, 103) as ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from thanhVien join chucVu on thanhVien.maCV = chucVu.maCV;";
+            string query = "select cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from thanhVien join chucVu on thanhVien.maCV = chucVu.maCV order by ngayThamGia DESC;";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgwDanhSachSinhVien.DataSource = dttb;
@@ -109,11 +112,13 @@ namespace QuanLyCauLacBo
             dgwDanhSachSinhVien.Columns[1].HeaderText = "Họ tên";
             dgwDanhSachSinhVien.Columns[2].HeaderText = "Giới tính";
             dgwDanhSachSinhVien.Columns[3].HeaderText = "Ngày sinh";
+            dgwDanhSachSinhVien.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgwDanhSachSinhVien.Columns[4].HeaderText = "Email";
             dgwDanhSachSinhVien.Columns[5].HeaderText = "Số điện thoại";
             dgwDanhSachSinhVien.Columns[6].HeaderText = "Địa chỉ";
             dgwDanhSachSinhVien.Columns[7].HeaderText = "Trình độ";
             dgwDanhSachSinhVien.Columns[8].HeaderText = "Ngày tham gia";
+            dgwDanhSachSinhVien.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgwDanhSachSinhVien.Columns[9].HeaderText = "Đóng góp";
             dgwDanhSachSinhVien.Columns[10].HeaderText = "Chức vụ";
             dgwDanhSachSinhVien.ReadOnly = true;
@@ -122,7 +127,7 @@ namespace QuanLyCauLacBo
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select maSK, tenSK, noiDungSK, CONVERT(datetime, CONVERT(datetime,thoiGianBatDau, 103), 108) as thoiGianBatDau, CONVERT(datetime, CONVERT(datetime,thoiGianKetThuc, 103), 108) as thoiGianKetThuc, diaDiem, phi from suKien;";
+            string query = "select maSK, tenSK, noiDungSK, thoiGianBatDau, thoiGianKetThuc, diaDiem, phi, (select count(*) from danhSachThamGia where danhSachThamGia.maSK = suKien.maSK) as soNguoiThamGia from suKien order by thoiGianBatDau DESC;";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgvDanhSachSuKien.DataSource = dttb;
@@ -130,9 +135,12 @@ namespace QuanLyCauLacBo
             dgvDanhSachSuKien.Columns[1].HeaderText = "Tên sự kiện";
             dgvDanhSachSuKien.Columns[2].HeaderText = "Nội dung sự kiện";
             dgvDanhSachSuKien.Columns[3].HeaderText = "Thời gian bắt đầu";
+            dgvDanhSachSuKien.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
             dgvDanhSachSuKien.Columns[4].HeaderText = "Thời gian kết thúc";
+            dgvDanhSachSuKien.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
             dgvDanhSachSuKien.Columns[5].HeaderText = "Địa điểm";
             dgvDanhSachSuKien.Columns[6].HeaderText = "Phí";
+            dgvDanhSachSuKien.Columns[7].HeaderText = "Số người tham gia";
             dgvDanhSachSuKien.ReadOnly = true;
         }
 
@@ -140,7 +148,7 @@ namespace QuanLyCauLacBo
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select thanhVien.cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, CONVERT(date, ngaySinh, 103) as ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from danhSachThamGia join thanhVien on thanhVien.cccd = danhSachThamGia.cccd join chucVu on thanhVien.maCV = chucVu.maCV join suKien on suKien.maSK = danhSachThamGia.maSK where danhSachThamGia.maSK = '" + txtMasukien.Text + "';";
+            string query = "select thanhVien.cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from danhSachThamGia join thanhVien on thanhVien.cccd = danhSachThamGia.cccd join chucVu on thanhVien.maCV = chucVu.maCV join suKien on suKien.maSK = danhSachThamGia.maSK where danhSachThamGia.maSK = '" + txtMasukien.Text + "';";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgvDanhSachThamGia.DataSource = dttb;
@@ -148,11 +156,13 @@ namespace QuanLyCauLacBo
             dgvDanhSachThamGia.Columns[1].HeaderText = "Họ tên";
             dgvDanhSachThamGia.Columns[2].HeaderText = "Giới tính";
             dgvDanhSachThamGia.Columns[3].HeaderText = "Ngày sinh";
+            dgvDanhSachThamGia.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvDanhSachThamGia.Columns[4].HeaderText = "Email";
             dgvDanhSachThamGia.Columns[5].HeaderText = "Số điện thoại";
             dgvDanhSachThamGia.Columns[6].HeaderText = "Địa chỉ";
             dgvDanhSachThamGia.Columns[7].HeaderText = "Trình độ";
             dgvDanhSachThamGia.Columns[8].HeaderText = "Ngày tham gia";
+            dgvDanhSachThamGia.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvDanhSachThamGia.Columns[9].HeaderText = "Đóng góp";
             dgvDanhSachThamGia.Columns[10].HeaderText = "Chức vụ";
             dgvDanhSachThamGia.ReadOnly = true;
@@ -192,9 +202,11 @@ namespace QuanLyCauLacBo
             dgvDanhSachDongGop.Columns[3].HeaderText = "Số điện thoại";
             dgvDanhSachDongGop.Columns[4].HeaderText = "Địa chỉ";
             dgvDanhSachDongGop.Columns[5].HeaderText = "Đóng góp";
+            dgvDanhSachDongGop.Columns[5].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
             dgvDanhSachDongGop.Columns[6].HeaderText = "Ngày đóng";
             dgvDanhSachDongGop.Columns[7].HeaderText = "Tổng số tiền đã đóng";
             dgvDanhSachDongGop.Columns[8].HeaderText = "Ngày tham gia";
+            dgvDanhSachDongGop.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvDanhSachDongGop.Columns[9].HeaderText = "Chức vụ";
             dgvDanhSachDongGop.ReadOnly = true;
         }
@@ -326,51 +338,48 @@ namespace QuanLyCauLacBo
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (txtCCCD.Text != "")
+            if (checkThongTin())
             {
-                if (checkThongTin())
+                try
                 {
-                    try
-                    {
-                        clsDatabase.OpenConnection();
-                        string query = "INSERT INTO thanhVien (cccd, hoTen, gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, maCV) values('" + txtCCCD.Text + "',N'" + txtHoten.Text + "','" + cbxGioitinh.SelectedValue.ToString() + "',CONVERT(date,'" + dtpNgaysinh.Text + "',103),'" + txtEmail.Text + "','" + txtSodienthoai.Text + "',N'" + txtDiachi.Text + "',N'" + txtTrinhdo.Text + "','" + cbxChucvu.SelectedValue.ToString() + "')";
-                        SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
-                        insertCmd.CommandType = CommandType.Text;
-                        insertCmd.ExecuteNonQuery();
-                        showDanhSachThanhVien();
-                        reset();
-                        MessageBox.Show("Đã thêm mới thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (SqlException ex)
-                    {
-                        String str1 = "UNIQUE KEY";
-                        String str2 = "PRIMARY KEY";
-                        String str = ex.ToString();
+                    clsDatabase.OpenConnection();
+                    string query = "INSERT INTO thanhVien (cccd, hoTen, gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, maCV) values('" + txtCCCD.Text + "',N'" + txtHoten.Text + "','" + cbxGioitinh.SelectedValue.ToString() + "',CONVERT(date,'" + dtpNgaysinh.Text + "',103),'" + txtEmail.Text + "','" + txtSodienthoai.Text + "',N'" + txtDiachi.Text + "',N'" + txtTrinhdo.Text + "','" + cbxChucvu.SelectedValue.ToString() + "')";
+                    SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
+                    insertCmd.CommandType = CommandType.Text;
+                    insertCmd.ExecuteNonQuery();
+                    showDanhSachThanhVien();
+                    reset();
+                    MessageBox.Show("Đã thêm mới thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (SqlException ex)
+                {
+                    String str2 = "PRIMARY KEY";
+                    String str = ex.ToString();
 
-                        if (str.Contains(str1))
-                        {
-                            MessageBox.Show("Số điện thoại đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            txtSodienthoai.Focus();
-                        }
-                        else if (str.Contains(str2))
-                        {
-                            MessageBox.Show("CCCD đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            txtCCCD.Focus();
-                        }
-                        else
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                    if (str.Contains(txtSodienthoai.Text))
+                    {
+                        MessageBox.Show("Số điện thoại đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtSodienthoai.Focus();
+                    }
+                    else if (str.Contains(txtEmail.Text))
+                    {
+                        MessageBox.Show("Email đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtSodienthoai.Focus();
+                    }
+                    else if (str.Contains(str2))
+                    {
+                        MessageBox.Show("CCCD đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtCCCD.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng nhập thông tin thành viên cần thêm trước khi nhấn thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng nhập thông tin thành viên cần thêm trước khi nhấn thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtCCCD.Focus();
+
             }
         }
-
+                
         private void dtnNguoithamgia_ValueChanged(object sender, EventArgs e)
         {
 
@@ -498,14 +507,17 @@ namespace QuanLyCauLacBo
         private void dgvDanhSachSuKien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = new DataGridViewRow();
-            row = dgvDanhSachSuKien.Rows[e.RowIndex];
-            txtMasukien.Text = Convert.ToString(row.Cells["maSK"].Value);
-            txtTensukien.Text = Convert.ToString(row.Cells["tenSK"].Value);
-            txtDiadiem.Text = Convert.ToString(row.Cells["diaDiem"].Value);
-            txtNoidungsk.Text = Convert.ToString(row.Cells["noiDungSK"].Value);
-            dtpTgbatdau.Text = Convert.ToString(row.Cells["thoiGianBatDau"].Value);
-            dtpTgketthuc.Text = Convert.ToString(row.Cells["thoiGianKetThuc"].Value);
-            txtPhi.Text = Convert.ToString(row.Cells["phi"].Value);
+            if (e.RowIndex >= 0)
+            {
+                row = dgvDanhSachSuKien.Rows[e.RowIndex];
+                txtMasukien.Text = Convert.ToString(row.Cells["maSK"].Value);
+                txtTensukien.Text = Convert.ToString(row.Cells["tenSK"].Value);
+                txtDiadiem.Text = Convert.ToString(row.Cells["diaDiem"].Value);
+                txtNoidungsk.Text = Convert.ToString(row.Cells["noiDungSK"].Value);
+                dtpTgbatdau.Text = Convert.ToString(row.Cells["thoiGianBatDau"].Value);
+                dtpTgketthuc.Text = Convert.ToString(row.Cells["thoiGianKetThuc"].Value);
+                txtPhi.Text = Convert.ToString(row.Cells["phi"].Value);
+            }
         }
 
         private void btnThemsk_Click(object sender, EventArgs e)
@@ -763,12 +775,14 @@ namespace QuanLyCauLacBo
         private void dgvDanhSachDongGop_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = new DataGridViewRow();
-            row = dgvDanhSachDongGop.Rows[e.RowIndex];
-            txtCCCDtc.Text = Convert.ToString(row.Cells["cccd"].Value);
-            dtpNgayDong.Text = Convert.ToString(row.Cells["ngayDong"].Value);
-            txtSotien.Text = Convert.ToString(row.Cells["soTien"].Value);
-            Temp = Convert.ToString(row.Cells["soTien"].Value);
-
+            if (e.RowIndex >= 0)
+            {
+                row = dgvDanhSachDongGop.Rows[e.RowIndex];
+                txtCCCDtc.Text = Convert.ToString(row.Cells["cccd"].Value);
+                dtpNgayDong.Text = Convert.ToString(row.Cells["ngayDong"].Value);
+                txtSotien.Text = Convert.ToString(row.Cells["soTien"].Value);
+                Temp = Convert.ToString(row.Cells["soTien"].Value);
+            }     
         }
         private void txtCCCDtimkiemTC_TextChanged(object sender, EventArgs e)
         {
