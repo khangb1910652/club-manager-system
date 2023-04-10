@@ -39,11 +39,14 @@ namespace QuanLyCauLacBo
                 btnThem.Visible = false;
                 btnSua.Visible = false;
                 btnXoa.Visible = false;
-                btnDon.Visible = false;
+
                 btnThemsk.Visible = false;
                 btnSuask.Visible = false;
                 btnXoask.Visible = false;
-                btnDonSK.Visible = false;
+
+                btnThemTC.Visible = false;
+                btnSuaTC.Visible = false;
+                btnXoaTC.Visible = false;
             }
 
         }
@@ -517,6 +520,7 @@ namespace QuanLyCauLacBo
                 dtpTgbatdau.Text = Convert.ToString(row.Cells["thoiGianBatDau"].Value);
                 dtpTgketthuc.Text = Convert.ToString(row.Cells["thoiGianKetThuc"].Value);
                 txtPhi.Text = Convert.ToString(row.Cells["phi"].Value);
+                showDanhSachThamGia();
             }
         }
 
