@@ -217,6 +217,7 @@ namespace QuanLyCauLacBo
             reset();
             showTaiChinh();
             showDanhSachDongGop();
+            showDanhSachThamGia();
         }
         private void loadGioiTinh()
         {
@@ -263,7 +264,7 @@ namespace QuanLyCauLacBo
             dtpTgbatdau.Value = DateTime.Now;
             dtpTgketthuc.Value = DateTime.Now;
             txtMasukien.Text = "";
-            
+
             txtCCCDtc.Text = "";
             txtSotien.Text = "";
             dtpNgayDong.Value = DateTime.Now;
@@ -274,6 +275,8 @@ namespace QuanLyCauLacBo
 
             return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
         }
+
+
         public bool checkThongTin()
         {
             if (txtCCCD.Text == "" || txtCCCD.Text.Length != 12)
@@ -370,13 +373,13 @@ namespace QuanLyCauLacBo
                     }
                     else
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("Vui lòng nhập thông tin thành viên cần thêm trước khi nhấn thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 
             }
         }
-
+                
         private void dtnNguoithamgia_ValueChanged(object sender, EventArgs e)
         {
 
@@ -384,7 +387,7 @@ namespace QuanLyCauLacBo
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (checkThongTin() )
+            if (txtCCCD.Text != "" && txtHoten.Text != "")
             {
                 try
                 {
@@ -401,7 +404,11 @@ namespace QuanLyCauLacBo
                 {
                     MessageBox.Show(ex.Message);
                 }
-
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn số CCCD hoặc Họ tên của thành viên cần chỉnh sửa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtMasukien.Focus();
             }
         }
 
@@ -496,6 +503,7 @@ namespace QuanLyCauLacBo
             return true;
 
         }
+
         private void dgvDanhSachSuKien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = new DataGridViewRow();
@@ -510,41 +518,47 @@ namespace QuanLyCauLacBo
                 dtpTgketthuc.Text = Convert.ToString(row.Cells["thoiGianKetThuc"].Value);
                 txtPhi.Text = Convert.ToString(row.Cells["phi"].Value);
             }
-            
         }
 
         private void btnThemsk_Click(object sender, EventArgs e)
         {
-            if (checkThongTinsk())
+            if (txtTensukien.Text != "")
             {
-                try
+                if (checkThongTinsk())
                 {
-                    clsDatabase.OpenConnection();
-                    string query = "INSERT INTO suKien (maSK, tenSK, noidungSK, thoiGianBatDau, thoiGianKetThuc, diaDiem, phi) values( dbo.generateMaSK(),N'" + txtTensukien.Text + "',N'" + txtNoidungsk.Text + "',CONVERT(datetime,CONVERT(datetime,'" + dtpTgbatdau.Text + "',103),108),CONVERT(datetime,CONVERT(datetime,'" + dtpTgketthuc.Text + "',103),108),N'" + txtDiadiem.Text + "','" + txtPhi.Text + "')";
-                    SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
-                    insertCmd.CommandType = CommandType.Text;
-                    insertCmd.ExecuteNonQuery();
+                    try
+                    {
+                        clsDatabase.OpenConnection();
+                        string query = "INSERT INTO suKien (maSK, tenSK, noidungSK, thoiGianBatDau, thoiGianKetThuc, diaDiem, phi) values( dbo.generateMaSK(),N'" + txtTensukien.Text + "',N'" + txtNoidungsk.Text + "',CONVERT(datetime,CONVERT(datetime,'" + dtpTgbatdau.Text + "',103),108),CONVERT(datetime,CONVERT(datetime,'" + dtpTgketthuc.Text + "',103),108),N'" + txtDiadiem.Text + "','" + txtPhi.Text + "')";
+                        SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
+                        insertCmd.CommandType = CommandType.Text;
+                        insertCmd.ExecuteNonQuery();
 
-                    string query1 = "update taiChinh set soDu = (soDu - '" + txtPhi.Text + "')";
-                    SqlCommand updateCmd = new SqlCommand(query1, clsDatabase.con);
-                    updateCmd.CommandType = CommandType.Text;
-                    updateCmd.ExecuteNonQuery();
-                    showTaiChinh();
-                    showDanhSachSuKien();
-                    reset();
-                    MessageBox.Show("Đã thêm mới sự kiện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string query1 = "update taiChinh set soDu = (soDu - '" + txtPhi.Text + "')";
+                        SqlCommand updateCmd = new SqlCommand(query1, clsDatabase.con);
+                        updateCmd.CommandType = CommandType.Text;
+                        updateCmd.ExecuteNonQuery();
+                        showTaiChinh();
+                        showDanhSachSuKien();
+                        reset();
+                        MessageBox.Show("Đã thêm mới sự kiện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập thông tin sự kiện cần thêm trước khi nhấn thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtTensukien.Focus();
             }
         }
 
         private void btnSuask_Click(object sender, EventArgs e)
         {
-            if (checkThongTinsk() && txtMasukien.Text != "" )
+            if (txtMasukien.Text != "")
             {
                 try
                 {
@@ -559,10 +573,13 @@ namespace QuanLyCauLacBo
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Vui lòng chọn mã sự kiện từ danh sách sự kiện!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    MessageBox.Show(ex.Message);
                 }
-
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập hoặc chọn số CCCD của thành viên cần chỉnh sửa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtMasukien.Focus();
             }
         }
 
@@ -619,61 +636,133 @@ namespace QuanLyCauLacBo
 
         private void btnDiemDanh_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (txtCCCDDiemDanh.Text != "")
+            {
+                if (txtMasukien.Text != "")
+                {
+                    try
+                    {
+                        clsDatabase.OpenConnection();
+                        string query = "INSERT INTO danhSachThamGia (cccd, maSK) values( '" + txtCCCDDiemDanh.Text + "','" + txtMasukien.Text + "')";
+                        SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
+                        insertCmd.CommandType = CommandType.Text;
+                        insertCmd.ExecuteNonQuery();
+                        showDanhSachThamGia();
+                        MessageBox.Show("Đã điểm danh thành viên tham gia sự kiện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("Thành viên đã được điểm danh ở sự kiện này rồi !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn Mã sự kiện để điểm danh !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập số CCCD của thành viên để điểm danh !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCCCDDiemDanh.Focus();
+            }
+        }
+
+        private void btnXoaDiemDanh_Click(object sender, EventArgs e)
+        {
+            if (txtCCCDDiemDanh.Text != "")
             {
                 try
                 {
                     clsDatabase.OpenConnection();
-                    string query = "INSERT INTO danhSachThamGia (cccd, maSK) values( '" + txtCCCDDiemDanh.Text + "','" + txtMasukien.Text + "')";
-                    SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
-                    insertCmd.CommandType = CommandType.Text;
-                    insertCmd.ExecuteNonQuery();
-                    showDanhSachThamGia();
-                    reset();
-                    MessageBox.Show("Đã điểm danh thành viên tham gia sự kiện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string query = "DELETE FROM danhSachThamGia WHERE cccd = '" + txtCCCDDiemDanh.Text + "' AND maSK = '" + txtMasukien.Text + "' ";
+                    SqlCommand deleteCmd = new SqlCommand(query, clsDatabase.con);
+                    deleteCmd.CommandType = CommandType.Text;
+                    int rowsAffected = deleteCmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Đã xoá thông tin điểm danh của thành viên có CCCD là " + txtCCCDDiemDanh.Text, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        showDanhSachThamGia();
+                        reset();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy thông tin điểm danh của thành viên có CCCD là " + txtCCCDDiemDanh.Text, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 catch (SqlException ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-
             }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập số CCCD của thành viên để xoá điểm danh !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCCCDDiemDanh.Focus();
+            }
+        }
+
+        public bool checkThongTintc()
+        {
+            if (txtCCCDtc.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập CCCD!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCCCDtc.Focus();
+                return false;
+            }
+            if (txtSotien.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập vào số tiền!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtSotien.Focus();
+                return false;
+            }
+
+
+            return true;
+
         }
 
         private void btnThemTC_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (txtCCCDtc.Text != "")
             {
-                try
+                if (checkThongTintc())
                 {
-                    clsDatabase.OpenConnection();
-                    string query = "INSERT INTO dongGop (soTien, ngayDong, cccd) values( '" + txtSotien.Text + "', CONVERT(datetime, CONVERT(datetime, '" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "', 103), 108), '" + txtCCCDtc.Text + "')";
-                    SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
-                    insertCmd.CommandType = CommandType.Text;
-                    insertCmd.ExecuteNonQuery();
+                    try
+                    {
+                        clsDatabase.OpenConnection();
+                        string query = "INSERT INTO dongGop (soTien, ngayDong, cccd) values( '" + txtSotien.Text + "', CONVERT(datetime, CONVERT(datetime, '" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + "', 103), 108), '" + txtCCCDtc.Text + "')";
+                        SqlCommand insertCmd = new SqlCommand(query, clsDatabase.con);
+                        insertCmd.CommandType = CommandType.Text;
+                        insertCmd.ExecuteNonQuery();
 
-                    string query1 = "update taiChinh set soDu = (soDu + '" + txtSotien.Text + "')";
-                    SqlCommand updateCmd = new SqlCommand(query1, clsDatabase.con);
-                    updateCmd.CommandType = CommandType.Text;
-                    updateCmd.ExecuteNonQuery();
+                        string query1 = "update taiChinh set soDu = (soDu + '" + txtSotien.Text + "')";
+                        SqlCommand updateCmd = new SqlCommand(query1, clsDatabase.con);
+                        updateCmd.CommandType = CommandType.Text;
+                        updateCmd.ExecuteNonQuery();
 
-                    string query2 = "update thanhVien set tongTien = (tongTien + '" + txtSotien.Text + "') where cccd = '" + txtCCCDtc.Text + "'";
-                    SqlCommand updateCmd2 = new SqlCommand(query2, clsDatabase.con);
-                    updateCmd2.CommandType = CommandType.Text;
-                    updateCmd2.ExecuteNonQuery();
+                        string query2 = "update thanhVien set tongTien = (tongTien + '" + txtSotien.Text + "') where cccd = '" + txtCCCDtc.Text + "'";
+                        SqlCommand updateCmd2 = new SqlCommand(query2, clsDatabase.con);
+                        updateCmd2.CommandType = CommandType.Text;
+                        updateCmd2.ExecuteNonQuery();
 
-                    showTaiChinh();
-                    showDanhSachDongGop();
-                    showDanhSachThanhVien();
-                    reset();
-                    MessageBox.Show("Đã thêm thông tin đóng góp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        showTaiChinh();
+                        showDanhSachDongGop();
+                        showDanhSachThanhVien();
+                        reset();
+                        MessageBox.Show("Đã thêm thông tin đóng góp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
             }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập thông tin đóng góp trước khi nhấn thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCCCDtc.Focus();
+            }
+
         }
 
         private void btnThoatTC_Click(object sender, EventArgs e)
@@ -703,7 +792,7 @@ namespace QuanLyCauLacBo
 
         private void btnSuaTC_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (txtCCCDtc.Text != "")
             {
                 try
                 {
@@ -733,9 +822,14 @@ namespace QuanLyCauLacBo
                 {
                     MessageBox.Show(ex.Message);
                 }
-
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập hoặc chọn số CCCD của thành viên cần chỉnh sửa đóng góp", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtMasukien.Focus();
             }
         }
+
 
         private void btnLuuTC_Click(object sender, EventArgs e)
         {
@@ -747,7 +841,7 @@ namespace QuanLyCauLacBo
 
         private void btnXoaTC_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (txtCCCDtc.Text != "")
             {
                 try
                 {
@@ -777,8 +871,14 @@ namespace QuanLyCauLacBo
                 {
                     MessageBox.Show(ex.Message);
                 }
-
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng nhập hoặc chọn số CCCD của thành viên cần xoá đóng góp", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtMasukien.Focus();
             }
         }
+
+
     }
 }
