@@ -382,7 +382,7 @@ namespace QuanLyCauLacBo
 
             }
         }
-                
+
         private void dtnNguoithamgia_ValueChanged(object sender, EventArgs e)
         {
 
@@ -786,7 +786,7 @@ namespace QuanLyCauLacBo
                 dtpNgayDong.Text = Convert.ToString(row.Cells["ngayDong"].Value);
                 txtSotien.Text = Convert.ToString(row.Cells["soTien"].Value);
                 Temp = Convert.ToString(row.Cells["soTien"].Value);
-            }     
+            }
         }
         private void txtCCCDtimkiemTC_TextChanged(object sender, EventArgs e)
         {
@@ -883,6 +883,23 @@ namespace QuanLyCauLacBo
             }
         }
 
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCCCDDiemDanh_TextChanged(object sender, EventArgs e)
+        {
+        }
     }
 }
