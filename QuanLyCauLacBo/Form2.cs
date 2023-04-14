@@ -587,7 +587,7 @@ namespace QuanLyCauLacBo
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập hoặc chọn số CCCD của thành viên cần chỉnh sửa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Vui lòng chọn sự kiện cần sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtMasukien.Focus();
             }
         }
