@@ -1119,7 +1119,6 @@
             // 
             dgwDanhSachSinhVien.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgwDanhSachSinhVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgwDanhSachSinhVien.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgwDanhSachSinhVien.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgwDanhSachSinhVien.Location = new Point(6, 48);
             dgwDanhSachSinhVien.Margin = new Padding(3, 2, 3, 2);
