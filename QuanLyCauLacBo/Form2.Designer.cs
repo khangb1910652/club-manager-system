@@ -497,6 +497,7 @@
             // 
             dgvDanhSachDongGop.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvDanhSachDongGop.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDanhSachDongGop.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgvDanhSachDongGop.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDanhSachDongGop.Location = new Point(5, 45);
             dgvDanhSachDongGop.Margin = new Padding(3, 2, 3, 2);
@@ -562,6 +563,7 @@
             // 
             dgvDanhSachThamGia.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvDanhSachThamGia.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDanhSachThamGia.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgvDanhSachThamGia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDanhSachThamGia.Location = new Point(3, 60);
             dgvDanhSachThamGia.Margin = new Padding(2, 1, 2, 1);
@@ -739,6 +741,7 @@
             // 
             dgvDanhSachSuKien.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvDanhSachSuKien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDanhSachSuKien.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgvDanhSachSuKien.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDanhSachSuKien.Location = new Point(8, 50);
             dgvDanhSachSuKien.Margin = new Padding(3, 2, 3, 2);
@@ -1119,6 +1122,7 @@
             // 
             dgwDanhSachSinhVien.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgwDanhSachSinhVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgwDanhSachSinhVien.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgwDanhSachSinhVien.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgwDanhSachSinhVien.Location = new Point(6, 48);
             dgwDanhSachSinhVien.Margin = new Padding(3, 2, 3, 2);
