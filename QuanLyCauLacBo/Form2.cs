@@ -107,43 +107,45 @@ namespace QuanLyCauLacBo
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from thanhVien join chucVu on thanhVien.maCV = chucVu.maCV order by ngayThamGia DESC;";
+            string query = "select ROW_NUMBER() over (order by ngayThamGia DESC) as STT, cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from thanhVien join chucVu on thanhVien.maCV = chucVu.maCV ;";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgwDanhSachSinhVien.DataSource = dttb;
-            dgwDanhSachSinhVien.Columns[0].HeaderText = "Căn cước công dân";
-            dgwDanhSachSinhVien.Columns[1].HeaderText = "Họ tên";
-            dgwDanhSachSinhVien.Columns[2].HeaderText = "Giới tính";
-            dgwDanhSachSinhVien.Columns[3].HeaderText = "Ngày sinh";
-            dgwDanhSachSinhVien.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgwDanhSachSinhVien.Columns[4].HeaderText = "Email";
-            dgwDanhSachSinhVien.Columns[5].HeaderText = "Số điện thoại";
-            dgwDanhSachSinhVien.Columns[6].HeaderText = "Địa chỉ";
-            dgwDanhSachSinhVien.Columns[7].HeaderText = "Trình độ";
-            dgwDanhSachSinhVien.Columns[8].HeaderText = "Ngày tham gia";
-            dgwDanhSachSinhVien.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgwDanhSachSinhVien.Columns[9].HeaderText = "Đóng góp";
-            dgwDanhSachSinhVien.Columns[10].HeaderText = "Chức vụ";
+            dgwDanhSachSinhVien.Columns[0].HeaderText = "Số thứ tự";
+            dgwDanhSachSinhVien.Columns[1].HeaderText = "Căn cước công dân";
+            dgwDanhSachSinhVien.Columns[2].HeaderText = "Họ tên";
+            dgwDanhSachSinhVien.Columns[3].HeaderText = "Giới tính";
+            dgwDanhSachSinhVien.Columns[4].HeaderText = "Ngày sinh";
+            dgwDanhSachSinhVien.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgwDanhSachSinhVien.Columns[5].HeaderText = "Email";
+            dgwDanhSachSinhVien.Columns[6].HeaderText = "Số điện thoại";
+            dgwDanhSachSinhVien.Columns[7].HeaderText = "Địa chỉ";
+            dgwDanhSachSinhVien.Columns[8].HeaderText = "Trình độ";
+            dgwDanhSachSinhVien.Columns[9].HeaderText = "Ngày tham gia";
+            dgwDanhSachSinhVien.Columns[9].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgwDanhSachSinhVien.Columns[10].HeaderText = "Đóng góp";
+            dgwDanhSachSinhVien.Columns[11].HeaderText = "Chức vụ";
             dgwDanhSachSinhVien.ReadOnly = true;
         }
         public void showDanhSachSuKien()
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select maSK, tenSK, noiDungSK, thoiGianBatDau, thoiGianKetThuc, diaDiem, phi, (select count(*) from danhSachThamGia where danhSachThamGia.maSK = suKien.maSK) as soNguoiThamGia from suKien order by thoiGianBatDau DESC;";
+            string query = "select ROW_NUMBER() over (order by thoiGianBatDau DESC) as STT, maSK, tenSK, noiDungSK, thoiGianBatDau, thoiGianKetThuc, diaDiem, phi, (select count(*) from danhSachThamGia where danhSachThamGia.maSK = suKien.maSK) as soNguoiThamGia from suKien ;";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgvDanhSachSuKien.DataSource = dttb;
-            dgvDanhSachSuKien.Columns[0].HeaderText = "Mã sự kiện";
-            dgvDanhSachSuKien.Columns[1].HeaderText = "Tên sự kiện";
-            dgvDanhSachSuKien.Columns[2].HeaderText = "Nội dung sự kiện";
-            dgvDanhSachSuKien.Columns[3].HeaderText = "Thời gian bắt đầu";
-            dgvDanhSachSuKien.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
-            dgvDanhSachSuKien.Columns[4].HeaderText = "Thời gian kết thúc";
+            dgvDanhSachSuKien.Columns[0].HeaderText = "Số thứ tự";
+            dgvDanhSachSuKien.Columns[1].HeaderText = "Mã sự kiện";
+            dgvDanhSachSuKien.Columns[2].HeaderText = "Tên sự kiện";
+            dgvDanhSachSuKien.Columns[3].HeaderText = "Nội dung sự kiện";
+            dgvDanhSachSuKien.Columns[4].HeaderText = "Thời gian bắt đầu";
             dgvDanhSachSuKien.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
-            dgvDanhSachSuKien.Columns[5].HeaderText = "Địa điểm";
-            dgvDanhSachSuKien.Columns[6].HeaderText = "Phí";
-            dgvDanhSachSuKien.Columns[7].HeaderText = "Số người tham gia";
+            dgvDanhSachSuKien.Columns[5].HeaderText = "Thời gian kết thúc";
+            dgvDanhSachSuKien.Columns[5].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
+            dgvDanhSachSuKien.Columns[6].HeaderText = "Địa điểm";
+            dgvDanhSachSuKien.Columns[7].HeaderText = "Phí";
+            dgvDanhSachSuKien.Columns[8].HeaderText = "Số người tham gia";
             dgvDanhSachSuKien.ReadOnly = true;
         }
 
@@ -151,23 +153,24 @@ namespace QuanLyCauLacBo
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select thanhVien.cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from danhSachThamGia join thanhVien on thanhVien.cccd = danhSachThamGia.cccd join chucVu on thanhVien.maCV = chucVu.maCV join suKien on suKien.maSK = danhSachThamGia.maSK where danhSachThamGia.maSK = '" + txtMasukien.Text + "';";
+            string query = "select ROW_NUMBER() over (order by danhSachThamGia.maSK DESC) as STT, thanhVien.cccd, hoTen, (CASE WHEN gioiTinh='0' THEN 'Nam' ELSE N'Nữ' END) AS gioiTinh, ngaySinh, email, soDienThoai, diaChi, trinhDo, ngayThamGia, tongTien, tenCV from danhSachThamGia join thanhVien on thanhVien.cccd = danhSachThamGia.cccd join chucVu on thanhVien.maCV = chucVu.maCV join suKien on suKien.maSK = danhSachThamGia.maSK where danhSachThamGia.maSK = '" + txtMasukien.Text + "';";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgvDanhSachThamGia.DataSource = dttb;
-            dgvDanhSachThamGia.Columns[0].HeaderText = "Căn cước công dân";
-            dgvDanhSachThamGia.Columns[1].HeaderText = "Họ tên";
-            dgvDanhSachThamGia.Columns[2].HeaderText = "Giới tính";
-            dgvDanhSachThamGia.Columns[3].HeaderText = "Ngày sinh";
-            dgvDanhSachThamGia.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvDanhSachThamGia.Columns[4].HeaderText = "Email";
-            dgvDanhSachThamGia.Columns[5].HeaderText = "Số điện thoại";
-            dgvDanhSachThamGia.Columns[6].HeaderText = "Địa chỉ";
-            dgvDanhSachThamGia.Columns[7].HeaderText = "Trình độ";
-            dgvDanhSachThamGia.Columns[8].HeaderText = "Ngày tham gia";
-            dgvDanhSachThamGia.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvDanhSachThamGia.Columns[9].HeaderText = "Đóng góp";
-            dgvDanhSachThamGia.Columns[10].HeaderText = "Chức vụ";
+            dgvDanhSachThamGia.Columns[0].HeaderText = "Số thứ tự";
+            dgvDanhSachThamGia.Columns[1].HeaderText = "Căn cước công dân";
+            dgvDanhSachThamGia.Columns[2].HeaderText = "Họ tên";
+            dgvDanhSachThamGia.Columns[3].HeaderText = "Giới tính";
+            dgvDanhSachThamGia.Columns[4].HeaderText = "Ngày sinh";
+            dgvDanhSachThamGia.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvDanhSachThamGia.Columns[5].HeaderText = "Email";
+            dgvDanhSachThamGia.Columns[6].HeaderText = "Số điện thoại";
+            dgvDanhSachThamGia.Columns[7].HeaderText = "Địa chỉ";
+            dgvDanhSachThamGia.Columns[8].HeaderText = "Trình độ";
+            dgvDanhSachThamGia.Columns[9].HeaderText = "Ngày tham gia";
+            dgvDanhSachThamGia.Columns[9].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvDanhSachThamGia.Columns[10].HeaderText = "Đóng góp";
+            dgvDanhSachThamGia.Columns[11].HeaderText = "Chức vụ";
             dgvDanhSachThamGia.ReadOnly = true;
         }
         public void showTaiChinh()
@@ -195,22 +198,23 @@ namespace QuanLyCauLacBo
         {
             DataTable dttb = new DataTable();
             clsDatabase.OpenConnection();
-            string query = "select thanhVien.cccd, hoTen, email, soDienThoai, diaChi, soTien, ngayDong, tongTien, ngayThamGia, tenCV from dongGop join thanhVien on dongGop.cccd = thanhVien.cccd join chucVu on thanhVien.maCV = chucVu.maCV order by ngayDong DESC;";
+            string query = "select ROW_NUMBER() over (order by ngayDong DESC) as STT,thanhVien.cccd, hoTen, email, soDienThoai, diaChi, soTien, ngayDong, tongTien, ngayThamGia, tenCV from dongGop join thanhVien on dongGop.cccd = thanhVien.cccd join chucVu on thanhVien.maCV = chucVu.maCV ;";
             SqlDataAdapter sda = new SqlDataAdapter(query, clsDatabase.con);
             sda.Fill(dttb);
             dgvDanhSachDongGop.DataSource = dttb;
-            dgvDanhSachDongGop.Columns[0].HeaderText = "Căn cước công dân";
-            dgvDanhSachDongGop.Columns[1].HeaderText = "Họ tên";
-            dgvDanhSachDongGop.Columns[2].HeaderText = "Email";
-            dgvDanhSachDongGop.Columns[3].HeaderText = "Số điện thoại";
-            dgvDanhSachDongGop.Columns[4].HeaderText = "Địa chỉ";
-            dgvDanhSachDongGop.Columns[5].HeaderText = "Đóng góp";
-            dgvDanhSachDongGop.Columns[6].HeaderText = "Ngày đóng";
-            dgvDanhSachDongGop.Columns[6].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
-            dgvDanhSachDongGop.Columns[7].HeaderText = "Tổng số tiền đã đóng";
-            dgvDanhSachDongGop.Columns[8].HeaderText = "Ngày tham gia";
-            dgvDanhSachDongGop.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgvDanhSachDongGop.Columns[9].HeaderText = "Chức vụ";
+            dgvDanhSachDongGop.Columns[0].HeaderText = "Số thứ tự";
+            dgvDanhSachDongGop.Columns[1].HeaderText = "Căn cước công dân";
+            dgvDanhSachDongGop.Columns[2].HeaderText = "Họ tên";
+            dgvDanhSachDongGop.Columns[3].HeaderText = "Email";
+            dgvDanhSachDongGop.Columns[4].HeaderText = "Số điện thoại";
+            dgvDanhSachDongGop.Columns[5].HeaderText = "Địa chỉ";
+            dgvDanhSachDongGop.Columns[6].HeaderText = "Đóng góp";
+            dgvDanhSachDongGop.Columns[7].HeaderText = "Ngày đóng";
+            dgvDanhSachDongGop.Columns[7].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
+            dgvDanhSachDongGop.Columns[8].HeaderText = "Tổng số tiền đã đóng";
+            dgvDanhSachDongGop.Columns[9].HeaderText = "Ngày tham gia";
+            dgvDanhSachDongGop.Columns[9].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvDanhSachDongGop.Columns[10].HeaderText = "Chức vụ";
             dgvDanhSachDongGop.ReadOnly = true;
         }
         private void Form2_Load(object sender, EventArgs e)
