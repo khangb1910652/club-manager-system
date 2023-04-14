@@ -205,8 +205,8 @@ namespace QuanLyCauLacBo
             dgvDanhSachDongGop.Columns[3].HeaderText = "Số điện thoại";
             dgvDanhSachDongGop.Columns[4].HeaderText = "Địa chỉ";
             dgvDanhSachDongGop.Columns[5].HeaderText = "Đóng góp";
-            dgvDanhSachDongGop.Columns[5].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
             dgvDanhSachDongGop.Columns[6].HeaderText = "Ngày đóng";
+            dgvDanhSachDongGop.Columns[6].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm:ss";
             dgvDanhSachDongGop.Columns[7].HeaderText = "Tổng số tiền đã đóng";
             dgvDanhSachDongGop.Columns[8].HeaderText = "Ngày tham gia";
             dgvDanhSachDongGop.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy";
