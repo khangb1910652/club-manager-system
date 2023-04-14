@@ -901,5 +901,15 @@ namespace QuanLyCauLacBo
         private void txtCCCDDiemDanh_TextChanged(object sender, EventArgs e)
         {
         }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
