@@ -30,22 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             tabPage3 = new TabPage();
-            btnThoatTC = new Button();
-            btnDonTC = new Button();
-            btnXoaTC = new Button();
-            btnSuaTC = new Button();
-            btnThemTC = new Button();
-            groupBox7 = new GroupBox();
-            dgvDanhSachDongGop = new DataGridView();
-            txtCCCDtimkiemTC = new TextBox();
-            label27 = new Label();
-            groupBox6 = new GroupBox();
-            dtpNgayDong = new DateTimePicker();
-            label24 = new Label();
-            txtSotien = new TextBox();
-            label25 = new Label();
-            txtCCCDtc = new TextBox();
-            label26 = new Label();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            panel4 = new Panel();
             groupBox5 = new GroupBox();
             label18 = new Label();
             label17 = new Label();
@@ -53,6 +39,25 @@
             txtTongchi = new TextBox();
             txtTongthu = new TextBox();
             txtSodu = new TextBox();
+            panel11 = new Panel();
+            groupBox6 = new GroupBox();
+            dtpNgayDong = new DateTimePicker();
+            label26 = new Label();
+            txtCCCDtc = new TextBox();
+            label24 = new Label();
+            label25 = new Label();
+            txtSotien = new TextBox();
+            panel13 = new Panel();
+            btnThemTC = new Button();
+            btnSuaTC = new Button();
+            btnXoaTC = new Button();
+            btnDonTC = new Button();
+            btnThoatTC = new Button();
+            panel12 = new Panel();
+            groupBox7 = new GroupBox();
+            dgvDanhSachDongGop = new DataGridView();
+            txtCCCDtimkiemTC = new TextBox();
+            label27 = new Label();
             tabPage2 = new TabPage();
             groupBox9 = new GroupBox();
             dgvDanhSachThamGia = new DataGridView();
@@ -131,10 +136,15 @@
             txtThongTin = new Label();
             tabControl1 = new TabControl();
             tabPage3.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            panel4.SuspendLayout();
+            groupBox5.SuspendLayout();
+            panel11.SuspendLayout();
+            groupBox6.SuspendLayout();
+            panel13.SuspendLayout();
+            panel12.SuspendLayout();
             groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDanhSachDongGop).BeginInit();
-            groupBox6.SuspendLayout();
-            groupBox5.SuspendLayout();
             tabPage2.SuspendLayout();
             groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDanhSachThamGia).BeginInit();
@@ -161,14 +171,9 @@
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(btnThoatTC);
-            tabPage3.Controls.Add(btnDonTC);
-            tabPage3.Controls.Add(btnXoaTC);
-            tabPage3.Controls.Add(btnSuaTC);
-            tabPage3.Controls.Add(btnThemTC);
-            tabPage3.Controls.Add(groupBox7);
-            tabPage3.Controls.Add(groupBox6);
-            tabPage3.Controls.Add(groupBox5);
+            tabPage3.Controls.Add(tableLayoutPanel3);
+            tabPage3.Controls.Add(panel13);
+            tabPage3.Controls.Add(panel12);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Margin = new Padding(3, 2, 3, 2);
             tabPage3.Name = "tabPage3";
@@ -178,197 +183,30 @@
             tabPage3.Text = "Quản lý tài chính";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // btnThoatTC
+            // tableLayoutPanel3
             // 
-            btnThoatTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnThoatTC.Image = (Image)resources.GetObject("btnThoatTC.Image");
-            btnThoatTC.Location = new Point(558, 620);
-            btnThoatTC.Margin = new Padding(3, 2, 3, 2);
-            btnThoatTC.Name = "btnThoatTC";
-            btnThoatTC.Size = new Size(62, 22);
-            btnThoatTC.TabIndex = 43;
-            btnThoatTC.Text = "Thoát";
-            btnThoatTC.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnThoatTC.UseVisualStyleBackColor = true;
-            btnThoatTC.Click += btnThoatTC_Click;
+            tableLayoutPanel3.ColumnCount = 2;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.4991646F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.5008354F));
+            tableLayoutPanel3.Controls.Add(panel4, 0, 0);
+            tableLayoutPanel3.Controls.Add(panel11, 1, 0);
+            tableLayoutPanel3.Dock = DockStyle.Top;
+            tableLayoutPanel3.Location = new Point(3, 2);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel3.Size = new Size(1198, 283);
+            tableLayoutPanel3.TabIndex = 48;
             // 
-            // btnDonTC
+            // panel4
             // 
-            btnDonTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnDonTC.Image = (Image)resources.GetObject("btnDonTC.Image");
-            btnDonTC.Location = new Point(435, 620);
-            btnDonTC.Margin = new Padding(3, 2, 3, 2);
-            btnDonTC.Name = "btnDonTC";
-            btnDonTC.Size = new Size(61, 22);
-            btnDonTC.TabIndex = 42;
-            btnDonTC.Text = "Dọn";
-            btnDonTC.TextAlign = ContentAlignment.MiddleRight;
-            btnDonTC.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnDonTC.UseVisualStyleBackColor = true;
-            btnDonTC.Click += btnLuuTC_Click;
-            // 
-            // btnXoaTC
-            // 
-            btnXoaTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnXoaTC.Image = (Image)resources.GetObject("btnXoaTC.Image");
-            btnXoaTC.Location = new Point(305, 620);
-            btnXoaTC.Margin = new Padding(3, 2, 3, 2);
-            btnXoaTC.Name = "btnXoaTC";
-            btnXoaTC.Size = new Size(61, 22);
-            btnXoaTC.TabIndex = 41;
-            btnXoaTC.Text = "Xoá";
-            btnXoaTC.TextAlign = ContentAlignment.MiddleRight;
-            btnXoaTC.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnXoaTC.UseVisualStyleBackColor = true;
-            btnXoaTC.Click += btnXoaTC_Click;
-            // 
-            // btnSuaTC
-            // 
-            btnSuaTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSuaTC.Image = (Image)resources.GetObject("btnSuaTC.Image");
-            btnSuaTC.Location = new Point(183, 620);
-            btnSuaTC.Margin = new Padding(3, 2, 3, 2);
-            btnSuaTC.Name = "btnSuaTC";
-            btnSuaTC.Size = new Size(61, 22);
-            btnSuaTC.TabIndex = 40;
-            btnSuaTC.Text = "Sửa";
-            btnSuaTC.TextAlign = ContentAlignment.MiddleRight;
-            btnSuaTC.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnSuaTC.UseVisualStyleBackColor = true;
-            btnSuaTC.Click += btnSuaTC_Click;
-            // 
-            // btnThemTC
-            // 
-            btnThemTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnThemTC.Image = (Image)resources.GetObject("btnThemTC.Image");
-            btnThemTC.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThemTC.Location = new Point(62, 620);
-            btnThemTC.Margin = new Padding(3, 2, 3, 2);
-            btnThemTC.Name = "btnThemTC";
-            btnThemTC.RightToLeft = RightToLeft.No;
-            btnThemTC.Size = new Size(61, 22);
-            btnThemTC.TabIndex = 39;
-            btnThemTC.Text = "Thêm";
-            btnThemTC.TextAlign = ContentAlignment.MiddleRight;
-            btnThemTC.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnThemTC.UseVisualStyleBackColor = true;
-            btnThemTC.Click += btnThemTC_Click;
-            // 
-            // groupBox7
-            // 
-            groupBox7.Controls.Add(dgvDanhSachDongGop);
-            groupBox7.Controls.Add(txtCCCDtimkiemTC);
-            groupBox7.Controls.Add(label27);
-            groupBox7.Location = new Point(5, 235);
-            groupBox7.Margin = new Padding(3, 2, 3, 2);
-            groupBox7.Name = "groupBox7";
-            groupBox7.Padding = new Padding(3, 2, 3, 2);
-            groupBox7.Size = new Size(689, 371);
-            groupBox7.TabIndex = 1;
-            groupBox7.TabStop = false;
-            groupBox7.Text = "Danh sách đóng góp";
-            // 
-            // dgvDanhSachDongGop
-            // 
-            dgvDanhSachDongGop.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvDanhSachDongGop.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDanhSachDongGop.Location = new Point(5, 45);
-            dgvDanhSachDongGop.Margin = new Padding(3, 2, 3, 2);
-            dgvDanhSachDongGop.Name = "dgvDanhSachDongGop";
-            dgvDanhSachDongGop.RowHeadersWidth = 51;
-            dgvDanhSachDongGop.RowTemplate.Height = 29;
-            dgvDanhSachDongGop.Size = new Size(678, 321);
-            dgvDanhSachDongGop.TabIndex = 15;
-            dgvDanhSachDongGop.CellContentClick += dgvDanhSachDongGop_CellContentClick;
-            // 
-            // txtCCCDtimkiemTC
-            // 
-            txtCCCDtimkiemTC.Location = new Point(241, 15);
-            txtCCCDtimkiemTC.Margin = new Padding(3, 2, 3, 2);
-            txtCCCDtimkiemTC.Name = "txtCCCDtimkiemTC";
-            txtCCCDtimkiemTC.Size = new Size(368, 23);
-            txtCCCDtimkiemTC.TabIndex = 13;
-            txtCCCDtimkiemTC.TextChanged += txtCCCDtimkiemTC_TextChanged;
-            // 
-            // label27
-            // 
-            label27.AutoSize = true;
-            label27.Location = new Point(63, 17);
-            label27.Name = "label27";
-            label27.Size = new Size(56, 15);
-            label27.TabIndex = 13;
-            label27.Text = "Tìm kiếm";
-            // 
-            // groupBox6
-            // 
-            groupBox6.Controls.Add(dtpNgayDong);
-            groupBox6.Controls.Add(label24);
-            groupBox6.Controls.Add(txtSotien);
-            groupBox6.Controls.Add(label25);
-            groupBox6.Controls.Add(txtCCCDtc);
-            groupBox6.Controls.Add(label26);
-            groupBox6.Location = new Point(3, 116);
-            groupBox6.Margin = new Padding(3, 2, 3, 2);
-            groupBox6.Name = "groupBox6";
-            groupBox6.Padding = new Padding(3, 2, 3, 2);
-            groupBox6.Size = new Size(697, 107);
-            groupBox6.TabIndex = 1;
-            groupBox6.TabStop = false;
-            groupBox6.Text = "Thông tin đóng góp";
-            // 
-            // dtpNgayDong
-            // 
-            dtpNgayDong.CustomFormat = "dd/MM/yyyy hh:mm:ss";
-            dtpNgayDong.Enabled = false;
-            dtpNgayDong.Format = DateTimePickerFormat.Custom;
-            dtpNgayDong.Location = new Point(241, 80);
-            dtpNgayDong.Margin = new Padding(3, 2, 3, 2);
-            dtpNgayDong.Name = "dtpNgayDong";
-            dtpNgayDong.Size = new Size(370, 23);
-            dtpNgayDong.TabIndex = 12;
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new Point(63, 80);
-            label24.Name = "label24";
-            label24.Size = new Size(66, 15);
-            label24.TabIndex = 11;
-            label24.Text = "Ngày đóng";
-            // 
-            // txtSotien
-            // 
-            txtSotien.Location = new Point(241, 49);
-            txtSotien.Margin = new Padding(3, 2, 3, 2);
-            txtSotien.Name = "txtSotien";
-            txtSotien.Size = new Size(370, 23);
-            txtSotien.TabIndex = 7;
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Location = new Point(63, 49);
-            label25.Name = "label25";
-            label25.Size = new Size(43, 15);
-            label25.TabIndex = 10;
-            label25.Text = "Số tiền";
-            // 
-            // txtCCCDtc
-            // 
-            txtCCCDtc.Location = new Point(241, 17);
-            txtCCCDtc.Margin = new Padding(3, 2, 3, 2);
-            txtCCCDtc.Name = "txtCCCDtc";
-            txtCCCDtc.Size = new Size(370, 23);
-            txtCCCDtc.TabIndex = 6;
-            // 
-            // label26
-            // 
-            label26.AutoSize = true;
-            label26.Location = new Point(63, 17);
-            label26.Name = "label26";
-            label26.Size = new Size(39, 15);
-            label26.TabIndex = 9;
-            label26.Text = "CCCD";
+            panel4.Controls.Add(groupBox5);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(3, 3);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(587, 277);
+            panel4.TabIndex = 44;
             // 
             // groupBox5
             // 
@@ -378,19 +216,21 @@
             groupBox5.Controls.Add(txtTongchi);
             groupBox5.Controls.Add(txtTongthu);
             groupBox5.Controls.Add(txtSodu);
-            groupBox5.Location = new Point(3, 5);
+            groupBox5.Dock = DockStyle.Fill;
+            groupBox5.Location = new Point(0, 0);
             groupBox5.Margin = new Padding(3, 2, 3, 2);
             groupBox5.Name = "groupBox5";
             groupBox5.Padding = new Padding(3, 2, 3, 2);
-            groupBox5.Size = new Size(697, 107);
+            groupBox5.Size = new Size(587, 277);
             groupBox5.TabIndex = 0;
             groupBox5.TabStop = false;
             groupBox5.Text = "Thông tin";
             // 
             // label18
             // 
+            label18.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label18.AutoSize = true;
-            label18.Location = new Point(63, 79);
+            label18.Location = new Point(62, 161);
             label18.Name = "label18";
             label18.Size = new Size(53, 15);
             label18.TabIndex = 5;
@@ -398,8 +238,9 @@
             // 
             // label17
             // 
+            label17.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label17.AutoSize = true;
-            label17.Location = new Point(63, 47);
+            label17.Location = new Point(62, 129);
             label17.Name = "label17";
             label17.Size = new Size(55, 15);
             label17.TabIndex = 4;
@@ -407,8 +248,9 @@
             // 
             // label15
             // 
+            label15.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label15.AutoSize = true;
-            label15.Location = new Point(63, 16);
+            label15.Location = new Point(62, 98);
             label15.Name = "label15";
             label15.Size = new Size(79, 15);
             label15.TabIndex = 3;
@@ -416,30 +258,272 @@
             // 
             // txtTongchi
             // 
-            txtTongchi.Location = new Point(241, 79);
+            txtTongchi.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtTongchi.Location = new Point(240, 161);
             txtTongchi.Margin = new Padding(3, 2, 3, 2);
             txtTongchi.Name = "txtTongchi";
             txtTongchi.ReadOnly = true;
-            txtTongchi.Size = new Size(370, 23);
+            txtTongchi.Size = new Size(264, 23);
             txtTongchi.TabIndex = 2;
             // 
             // txtTongthu
             // 
-            txtTongthu.Location = new Point(241, 47);
+            txtTongthu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtTongthu.Location = new Point(240, 129);
             txtTongthu.Margin = new Padding(3, 2, 3, 2);
             txtTongthu.Name = "txtTongthu";
             txtTongthu.ReadOnly = true;
-            txtTongthu.Size = new Size(370, 23);
+            txtTongthu.Size = new Size(264, 23);
             txtTongthu.TabIndex = 1;
             // 
             // txtSodu
             // 
-            txtSodu.Location = new Point(241, 16);
+            txtSodu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtSodu.Location = new Point(240, 98);
             txtSodu.Margin = new Padding(3, 2, 3, 2);
             txtSodu.Name = "txtSodu";
             txtSodu.ReadOnly = true;
-            txtSodu.Size = new Size(370, 23);
+            txtSodu.Size = new Size(264, 23);
             txtSodu.TabIndex = 0;
+            // 
+            // panel11
+            // 
+            panel11.Controls.Add(groupBox6);
+            panel11.Dock = DockStyle.Fill;
+            panel11.Location = new Point(596, 3);
+            panel11.Name = "panel11";
+            panel11.Size = new Size(599, 277);
+            panel11.TabIndex = 45;
+            // 
+            // groupBox6
+            // 
+            groupBox6.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            groupBox6.Controls.Add(dtpNgayDong);
+            groupBox6.Controls.Add(label26);
+            groupBox6.Controls.Add(txtCCCDtc);
+            groupBox6.Controls.Add(label24);
+            groupBox6.Controls.Add(label25);
+            groupBox6.Controls.Add(txtSotien);
+            groupBox6.Dock = DockStyle.Fill;
+            groupBox6.Location = new Point(0, 0);
+            groupBox6.Margin = new Padding(3, 2, 3, 2);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Padding = new Padding(3, 2, 3, 2);
+            groupBox6.Size = new Size(599, 277);
+            groupBox6.TabIndex = 1;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Thông tin đóng góp";
+            // 
+            // dtpNgayDong
+            // 
+            dtpNgayDong.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dtpNgayDong.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            dtpNgayDong.Enabled = false;
+            dtpNgayDong.Format = DateTimePickerFormat.Custom;
+            dtpNgayDong.Location = new Point(219, 169);
+            dtpNgayDong.Margin = new Padding(3, 2, 3, 2);
+            dtpNgayDong.Name = "dtpNgayDong";
+            dtpNgayDong.Size = new Size(275, 23);
+            dtpNgayDong.TabIndex = 12;
+            // 
+            // label26
+            // 
+            label26.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label26.AutoSize = true;
+            label26.Location = new Point(41, 106);
+            label26.Name = "label26";
+            label26.Size = new Size(39, 15);
+            label26.TabIndex = 9;
+            label26.Text = "CCCD";
+            // 
+            // txtCCCDtc
+            // 
+            txtCCCDtc.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtCCCDtc.Location = new Point(219, 106);
+            txtCCCDtc.Margin = new Padding(3, 2, 3, 2);
+            txtCCCDtc.Name = "txtCCCDtc";
+            txtCCCDtc.Size = new Size(275, 23);
+            txtCCCDtc.TabIndex = 6;
+            // 
+            // label24
+            // 
+            label24.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label24.AutoSize = true;
+            label24.Location = new Point(41, 169);
+            label24.Name = "label24";
+            label24.Size = new Size(66, 15);
+            label24.TabIndex = 11;
+            label24.Text = "Ngày đóng";
+            // 
+            // label25
+            // 
+            label25.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label25.AutoSize = true;
+            label25.Location = new Point(41, 138);
+            label25.Name = "label25";
+            label25.Size = new Size(43, 15);
+            label25.TabIndex = 10;
+            label25.Text = "Số tiền";
+            // 
+            // txtSotien
+            // 
+            txtSotien.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtSotien.Location = new Point(219, 138);
+            txtSotien.Margin = new Padding(3, 2, 3, 2);
+            txtSotien.Name = "txtSotien";
+            txtSotien.Size = new Size(275, 23);
+            txtSotien.TabIndex = 7;
+            // 
+            // panel13
+            // 
+            panel13.BackColor = Color.DimGray;
+            panel13.Controls.Add(btnThemTC);
+            panel13.Controls.Add(btnSuaTC);
+            panel13.Controls.Add(btnXoaTC);
+            panel13.Controls.Add(btnDonTC);
+            panel13.Controls.Add(btnThoatTC);
+            panel13.Dock = DockStyle.Bottom;
+            panel13.Location = new Point(3, 722);
+            panel13.Name = "panel13";
+            panel13.Size = new Size(1198, 64);
+            panel13.TabIndex = 47;
+            // 
+            // btnThemTC
+            // 
+            btnThemTC.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            btnThemTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnThemTC.Image = (Image)resources.GetObject("btnThemTC.Image");
+            btnThemTC.ImageAlign = ContentAlignment.MiddleLeft;
+            btnThemTC.Location = new Point(319, 15);
+            btnThemTC.Margin = new Padding(3, 2, 3, 2);
+            btnThemTC.Name = "btnThemTC";
+            btnThemTC.RightToLeft = RightToLeft.No;
+            btnThemTC.Size = new Size(72, 33);
+            btnThemTC.TabIndex = 39;
+            btnThemTC.Text = "Thêm";
+            btnThemTC.TextAlign = ContentAlignment.MiddleRight;
+            btnThemTC.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnThemTC.UseVisualStyleBackColor = true;
+            btnThemTC.Click += btnThemTC_Click;
+            // 
+            // btnSuaTC
+            // 
+            btnSuaTC.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            btnSuaTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnSuaTC.Image = (Image)resources.GetObject("btnSuaTC.Image");
+            btnSuaTC.Location = new Point(440, 15);
+            btnSuaTC.Margin = new Padding(3, 2, 3, 2);
+            btnSuaTC.Name = "btnSuaTC";
+            btnSuaTC.Size = new Size(72, 33);
+            btnSuaTC.TabIndex = 40;
+            btnSuaTC.Text = "Sửa";
+            btnSuaTC.TextAlign = ContentAlignment.MiddleRight;
+            btnSuaTC.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnSuaTC.UseVisualStyleBackColor = true;
+            btnSuaTC.Click += btnSuaTC_Click;
+            // 
+            // btnXoaTC
+            // 
+            btnXoaTC.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            btnXoaTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnXoaTC.Image = (Image)resources.GetObject("btnXoaTC.Image");
+            btnXoaTC.Location = new Point(562, 15);
+            btnXoaTC.Margin = new Padding(3, 2, 3, 2);
+            btnXoaTC.Name = "btnXoaTC";
+            btnXoaTC.Size = new Size(72, 33);
+            btnXoaTC.TabIndex = 41;
+            btnXoaTC.Text = "Xoá";
+            btnXoaTC.TextAlign = ContentAlignment.MiddleRight;
+            btnXoaTC.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnXoaTC.UseVisualStyleBackColor = true;
+            btnXoaTC.Click += btnXoaTC_Click;
+            // 
+            // btnDonTC
+            // 
+            btnDonTC.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            btnDonTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnDonTC.Image = (Image)resources.GetObject("btnDonTC.Image");
+            btnDonTC.Location = new Point(692, 15);
+            btnDonTC.Margin = new Padding(3, 2, 3, 2);
+            btnDonTC.Name = "btnDonTC";
+            btnDonTC.Size = new Size(72, 33);
+            btnDonTC.TabIndex = 42;
+            btnDonTC.Text = "Dọn";
+            btnDonTC.TextAlign = ContentAlignment.MiddleRight;
+            btnDonTC.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnDonTC.UseVisualStyleBackColor = true;
+            btnDonTC.Click += btnLuuTC_Click;
+            // 
+            // btnThoatTC
+            // 
+            btnThoatTC.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            btnThoatTC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnThoatTC.Image = (Image)resources.GetObject("btnThoatTC.Image");
+            btnThoatTC.Location = new Point(815, 15);
+            btnThoatTC.Margin = new Padding(3, 2, 3, 2);
+            btnThoatTC.Name = "btnThoatTC";
+            btnThoatTC.Size = new Size(73, 33);
+            btnThoatTC.TabIndex = 43;
+            btnThoatTC.Text = "Thoát";
+            btnThoatTC.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnThoatTC.UseVisualStyleBackColor = true;
+            btnThoatTC.Click += btnThoatTC_Click;
+            // 
+            // panel12
+            // 
+            panel12.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel12.Controls.Add(groupBox7);
+            panel12.Location = new Point(3, 288);
+            panel12.Name = "panel12";
+            panel12.Size = new Size(1198, 428);
+            panel12.TabIndex = 46;
+            // 
+            // groupBox7
+            // 
+            groupBox7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox7.Controls.Add(dgvDanhSachDongGop);
+            groupBox7.Controls.Add(txtCCCDtimkiemTC);
+            groupBox7.Controls.Add(label27);
+            groupBox7.Location = new Point(5, 15);
+            groupBox7.Margin = new Padding(3, 2, 3, 2);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Padding = new Padding(3, 2, 3, 2);
+            groupBox7.Size = new Size(1190, 411);
+            groupBox7.TabIndex = 1;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "Danh sách đóng góp";
+            // 
+            // dgvDanhSachDongGop
+            // 
+            dgvDanhSachDongGop.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvDanhSachDongGop.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDanhSachDongGop.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDanhSachDongGop.Location = new Point(5, 45);
+            dgvDanhSachDongGop.Margin = new Padding(3, 2, 3, 2);
+            dgvDanhSachDongGop.Name = "dgvDanhSachDongGop";
+            dgvDanhSachDongGop.RowHeadersWidth = 51;
+            dgvDanhSachDongGop.RowTemplate.Height = 29;
+            dgvDanhSachDongGop.Size = new Size(1183, 362);
+            dgvDanhSachDongGop.TabIndex = 15;
+            dgvDanhSachDongGop.CellContentClick += dgvDanhSachDongGop_CellContentClick;
+            // 
+            // txtCCCDtimkiemTC
+            // 
+            txtCCCDtimkiemTC.Location = new Point(172, 15);
+            txtCCCDtimkiemTC.Margin = new Padding(3, 2, 3, 2);
+            txtCCCDtimkiemTC.Name = "txtCCCDtimkiemTC";
+            txtCCCDtimkiemTC.Size = new Size(368, 23);
+            txtCCCDtimkiemTC.TabIndex = 13;
+            txtCCCDtimkiemTC.TextChanged += txtCCCDtimkiemTC_TextChanged;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Location = new Point(54, 18);
+            label27.Name = "label27";
+            label27.Size = new Size(56, 15);
+            label27.TabIndex = 13;
+            label27.Text = "Tìm kiếm";
             // 
             // tabPage2
             // 
@@ -539,7 +623,7 @@
             btnXoask.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             btnXoask.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnXoask.Image = (Image)resources.GetObject("btnXoask.Image");
-            btnXoask.Location = new Point(568, 19);
+            btnXoask.Location = new Point(572, 19);
             btnXoask.Margin = new Padding(3, 2, 3, 2);
             btnXoask.Name = "btnXoask";
             btnXoask.Size = new Size(61, 35);
@@ -555,7 +639,7 @@
             btnThoatsk.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             btnThoatsk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnThoatsk.Image = (Image)resources.GetObject("btnThoatsk.Image");
-            btnThoatsk.Location = new Point(824, 19);
+            btnThoatsk.Location = new Point(839, 19);
             btnThoatsk.Margin = new Padding(3, 2, 3, 2);
             btnThoatsk.Name = "btnThoatsk";
             btnThoatsk.Size = new Size(62, 35);
@@ -902,6 +986,7 @@
             // 
             // panel6
             // 
+            panel6.BackColor = Color.DimGray;
             panel6.Controls.Add(btnThem);
             panel6.Controls.Add(btnThoat);
             panel6.Controls.Add(btnXoa);
@@ -1422,13 +1507,18 @@
             WindowState = FormWindowState.Maximized;
             Load += Form2_Load;
             tabPage3.ResumeLayout(false);
+            tableLayoutPanel3.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
+            panel11.ResumeLayout(false);
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
+            panel13.ResumeLayout(false);
+            panel12.ResumeLayout(false);
             groupBox7.ResumeLayout(false);
             groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDanhSachDongGop).EndInit();
-            groupBox6.ResumeLayout(false);
-            groupBox6.PerformLayout();
-            groupBox5.ResumeLayout(false);
-            groupBox5.PerformLayout();
             tabPage2.ResumeLayout(false);
             groupBox9.ResumeLayout(false);
             groupBox9.PerformLayout();
@@ -1590,5 +1680,10 @@
         private Panel panel7;
         private Panel panel9;
         private Panel panel10;
+        private TableLayoutPanel tableLayoutPanel3;
+        private Panel panel4;
+        private Panel panel11;
+        private Panel panel13;
+        private Panel panel12;
     }
 }
