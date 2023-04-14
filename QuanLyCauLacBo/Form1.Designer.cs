@@ -48,7 +48,7 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(35, 19);
             label2.Name = "label2";
-            label2.Size = new Size(126, 19);
+            label2.Size = new Size(110, 16);
             label2.TabIndex = 1;
             label2.Text = "Tên đăng nhập";
             // 
@@ -62,7 +62,7 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(35, 72);
             label1.Name = "label1";
-            label1.Size = new Size(80, 19);
+            label1.Size = new Size(71, 16);
             label1.TabIndex = 2;
             label1.Text = "Mật khẩu";
             // 
@@ -72,7 +72,7 @@
             txtTendangnhap.BackColor = Color.White;
             txtTendangnhap.Location = new Point(162, 19);
             txtTendangnhap.Name = "txtTendangnhap";
-            txtTendangnhap.Size = new Size(168, 27);
+            txtTendangnhap.Size = new Size(168, 23);
             txtTendangnhap.TabIndex = 3;
             txtTendangnhap.TextChanged += txtTendangnhap_TextChanged;
             // 
@@ -82,7 +82,7 @@
             txtMatkhau.Location = new Point(162, 72);
             txtMatkhau.Name = "txtMatkhau";
             txtMatkhau.PasswordChar = '*';
-            txtMatkhau.Size = new Size(168, 27);
+            txtMatkhau.Size = new Size(168, 23);
             txtMatkhau.TabIndex = 4;
             // 
             // btnDangnhap
@@ -125,6 +125,7 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(782, 453);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Name = "Form1";
             Text = "Đăng nhập";
             Load += Form1_Load;
