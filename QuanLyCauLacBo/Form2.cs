@@ -322,9 +322,9 @@ namespace QuanLyCauLacBo
                 txtDiachi.Focus();
                 return false;
             }
-            if (txtSodienthoai.Text == "")
+            if (txtSodienthoai.Text == "" || txtSodienthoai.Text.Length <10 || txtSodienthoai.Text.Length >12)
             {
-                MessageBox.Show("Vui lòng nhập số điện thoại là các số!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Vui lòng nhập số điện thoại đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtSodienthoai.Focus();
                 return false;
             }
@@ -380,7 +380,8 @@ namespace QuanLyCauLacBo
                     }
                     else
                     {
-                        MessageBox.Show("Vui lòng nhập thông tin thành viên cần thêm trước khi nhấn thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Vui lòng nhập số điện thoại đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtSodienthoai.Focus();
                     }
                 }
 
