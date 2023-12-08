@@ -1,2 +1,2 @@
-# Hướng Dẫn Sử Dụng và Cài Đặt Mã Nguồn
-Mở file QuanLyCauLacBo.sln trong SourceCode để khởi chạy dự  án.
+# User Guide and Source Code Installation Instructions
+Open the "QuanLyCauLacBo.sln" file in the "SourceCode" directory to launch the project.
